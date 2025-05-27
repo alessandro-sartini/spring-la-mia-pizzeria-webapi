@@ -23,6 +23,7 @@ public class PizzaService {
 
    
     public List<Pizza> findAll() {
+        
         return pizzaRepository.findAll();
     }
 
@@ -38,12 +39,16 @@ public class PizzaService {
 
         Optional<Pizza> pizzaAttempt = pizzaRepository.findById(id);
 
-        if (pizzaAttempt.isEmpty()) {
-            // return pizzaAttempt.get();
-        }
+        // if (pizzaAttempt.isEmpty()) {
+        //     // return pizzaAttempt.get();
+        // }
 
         return pizzaAttempt.get();
 
+    }
+
+    public Optional<Pizza> findById(Integer id){
+        return pizzaRepository.findById(id);
     }
 
     public List<Pizza> findByNameOrDescription(String query) {
@@ -81,9 +86,11 @@ public class PizzaService {
         pizzaRepository.delete(pizza);
     }
 
-    public Boolean existById(Integer id){
+    public boolean existById(Integer id){
         return pizzaRepository.existsById(id);
     }
+
+
     public Boolean exist(Pizza pizza){
         return pizzaRepository.existsById(pizza.getId());
     }
