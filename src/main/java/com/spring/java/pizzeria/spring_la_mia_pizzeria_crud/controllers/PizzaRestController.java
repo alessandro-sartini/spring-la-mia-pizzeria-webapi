@@ -16,12 +16,13 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/pizzas")
-public class restPizzaController {
+public class PizzaRestController {
 
     @Autowired
     PizzaService service;
@@ -55,7 +56,7 @@ public class restPizzaController {
                 service.create(pizza), HttpStatus.OK);
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<Pizza> patch(@PathVariable Integer id,
             @Valid @RequestBody Pizza pizza) {
 

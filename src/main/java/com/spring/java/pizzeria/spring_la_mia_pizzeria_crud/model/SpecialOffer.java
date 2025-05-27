@@ -2,6 +2,7 @@ package com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -35,7 +36,8 @@ public class SpecialOffer {
     @FutureOrPresent(message = "La data di inizio non può essere precedente alla data odierna.")
     private LocalDate finishDate;
 
-    @JsonIgnore
+    // Per evitare  RICORSIONEEEE
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "pizza_id", nullable = false)
     private Pizza pizza;

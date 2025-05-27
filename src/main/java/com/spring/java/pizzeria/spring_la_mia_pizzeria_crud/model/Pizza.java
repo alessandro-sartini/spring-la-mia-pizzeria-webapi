@@ -3,6 +3,8 @@ package com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,13 +46,13 @@ public class Pizza {
     @Min(value = 4, message = "Il prezzo deve essere almeno 4.")
     private BigDecimal price;
 
+    // Per evitare  RICORSIONEEEE
+    @JsonManagedReference
     @OneToMany(mappedBy = "pizza")
     private List<SpecialOffer> offers;
 
-
+    @JsonManagedReference
     @ManyToMany
-    // CONTROLLA!
-    // @JsonIgnore
     @JoinTable( 
         name = "ingredient_pizza",
         joinColumns = @JoinColumn(name = "pizza_id"),
