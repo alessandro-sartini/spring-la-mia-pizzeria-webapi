@@ -9,21 +9,21 @@ import org.springframework.stereotype.Service;
 
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model.Pizza;
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.model.SpecialOffer;
-import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.repo.OfferRepository;
 import com.spring.java.pizzeria.spring_la_mia_pizzeria_crud.repo.PizzaRepository;
 
 @Service
 public class PizzaService {
 
+    
     @Autowired
-    private OfferRepository offerRepository;
+    private SpecialOfferService offerService;
+
 
     @Autowired
     private PizzaRepository pizzaRepository;
 
-   
     public List<Pizza> findAll() {
-        
+
         return pizzaRepository.findAll();
     }
 
@@ -40,14 +40,14 @@ public class PizzaService {
         Optional<Pizza> pizzaAttempt = pizzaRepository.findById(id);
 
         // if (pizzaAttempt.isEmpty()) {
-        //     // return pizzaAttempt.get();
+        // // return pizzaAttempt.get();
         // }
 
         return pizzaAttempt.get();
 
     }
 
-    public Optional<Pizza> findById(Integer id){
+    public Optional<Pizza> findById(Integer id) {
         return pizzaRepository.findById(id);
     }
 
@@ -66,10 +66,9 @@ public class PizzaService {
     }
 
     public void delate(Pizza pizza) {
-        
 
         for (SpecialOffer offerDelete : pizza.getOffers()) {
-            offerRepository.delete(offerDelete);
+            offerService.delete(offerDelete);
         }
 
         pizzaRepository.delete(pizza);
@@ -79,19 +78,18 @@ public class PizzaService {
 
         Pizza pizza = getByid(id);
 
-       for (SpecialOffer offerDelete : pizza.getOffers()) {
-            offerRepository.delete(offerDelete);
+        for (SpecialOffer offerDelete : pizza.getOffers()) {
+            offerService.delete(offerDelete);
         }
 
         pizzaRepository.delete(pizza);
     }
 
-    public boolean existById(Integer id){
+    public boolean existById(Integer id) {
         return pizzaRepository.existsById(id);
     }
 
-
-    public Boolean exist(Pizza pizza){
+    public Boolean exist(Pizza pizza) {
         return pizzaRepository.existsById(pizza.getId());
     }
 

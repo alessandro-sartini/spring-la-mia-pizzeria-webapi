@@ -65,7 +65,7 @@ public class restPizzaController {
 
         pizza.setId(id);
         return new ResponseEntity<Pizza>(
-                service.create(pizza), HttpStatus.OK);
+                service.updatePizza(pizza), HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
