@@ -64,7 +64,7 @@ public class restPizzaController {
     public ResponseEntity<Pizza> patch(@PathVariable Integer id,
             @Valid @RequestBody Pizza pizza) {
 
-        if (service.findById(id).isEmpty()) {
+        if (!service.existById(id)) {
             return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
         }
 
@@ -76,7 +76,7 @@ public class restPizzaController {
     @DeleteMapping("{id}")
     public ResponseEntity<Pizza> destroy(@PathVariable Integer id) {
 
-        if (service.existById(id)) {
+        if (!service.existById(id)) {
             return new ResponseEntity<Pizza>(HttpStatus.NOT_FOUND);
         }
         service.delateById(id);
